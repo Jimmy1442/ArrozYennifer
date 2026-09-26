@@ -24,14 +24,14 @@
 }
 
 .filtro-concepto-btn:hover {
-  border-color: #F26B7A;
+  border-color: #E63946;
   transform: translateY(-2px);
 }
 
 .filtro-concepto-btn.activo {
-  background: linear-gradient(135deg, #F26B7A, #E55568);
+  background: linear-gradient(135deg, #E63946, #C62E3A);
   color: #FFF8E7;
-  border-color: #F26B7A;
+  border-color: #E63946;
   box-shadow: 0 6px 15px rgba(242, 107, 122, 0.3);
 }
 
@@ -93,7 +93,7 @@
 }
 
 .tabla-gastos-desktop .table-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #F26B7A;
+  background: #E63946;
 }
 
 /* ═══════════════════════════════════════════
@@ -116,7 +116,7 @@
 }
 
 .gasto-card-activa {
-  border-color: #F26B7A;
+  border-color: #E63946;
   box-shadow: 0 8px 22px rgba(242, 107, 122, 0.25);
 }
 
@@ -138,7 +138,7 @@
 .gasto-card-check input[type='checkbox'] {
   width: 20px;
   height: 20px;
-  accent-color: #F26B7A;
+  accent-color: #E63946;
   cursor: pointer;
   margin: 0;
 }
@@ -165,7 +165,7 @@
 .gasto-card-valor {
   font-size: 18px;
   font-weight: 800;
-  color: #F26B7A;
+  color: #E63946;
   flex-shrink: 0;
 }
 

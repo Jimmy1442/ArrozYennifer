@@ -13,6 +13,7 @@ import {
 import { db } from '../firebase';
 import TopBar from '../components/TopBar';
 import Button from '../components/Button';
+import { validarNombre, validarTelefono, primerError } from '../utils/validaciones';
 import '../styles/Modulos.css';
 
 function Clientes({ usuario, onAbrirSidebar }) {
@@ -51,7 +52,25 @@ function Clientes({ usuario, onAbrirSidebar }) {
   const agregar = async () => {
     const nombre = nuevo.nombre.trim();
     const telefono = nuevo.telefono.trim();
-    if (!nombre || !telefono) return;
+
+    const errorValidacion = primerError(
+      validarNombre(nombre, { campo: 'nombre del cliente' }),
+      validarTelefono(telefono)
+    );
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
+
+    // 🚫 Evitar clientes duplicados (mismo teléfono)
+    const telefonoNormalizado = telefono.replace(/\D/g, '');
+    const yaExiste = clientes.some(
+      (c) => (c.telefono || '').replace(/\D/g, '') === telefonoNormalizado
+    );
+    if (yaExiste) {
+      setError('Ya existe un cliente registrado con ese teléfono');
+      return;
+    }
 
     setGuardando(true);
     setError('');
@@ -79,7 +98,27 @@ function Clientes({ usuario, onAbrirSidebar }) {
     if (!editando) return;
     const nombre = editando.nombre?.trim();
     const telefono = editando.telefono?.trim();
-    if (!nombre || !telefono) return;
+
+    const errorValidacion = primerError(
+      validarNombre(nombre, { campo: 'nombre del cliente' }),
+      validarTelefono(telefono)
+    );
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
+
+    // 🚫 Evitar que el teléfono choque con el de otro cliente distinto
+    const telefonoNormalizado = telefono.replace(/\D/g, '');
+    const yaExiste = clientes.some(
+      (c) =>
+        c.id !== editando.id &&
+        (c.telefono || '').replace(/\D/g, '') === telefonoNormalizado
+    );
+    if (yaExiste) {
+      setError('Ya existe otro cliente registrado con ese teléfono');
+      return;
+    }
 
     setGuardandoEdit(true);
     setError('');

@@ -13,6 +13,11 @@ import {
 import { db } from '../firebase';
 import TopBar from '../components/TopBar';
 import Button from '../components/Button';
+import {
+  validarNumero,
+  validarFecha,
+  primerError
+} from '../utils/validaciones';
 import '../styles/Gastos.css';
 
 // 📝 Conceptos predefinidos
@@ -215,9 +220,22 @@ function Gastos({ usuario, onAbrirSidebar }) {
   // 💰 Total filtrado
   const totalGastos = gastosFiltrados.reduce((s, g) => s + (Number(g.valor) || 0), 0);
 
+  // 🛡️ Validaciones del gasto
+  const validarGasto = (datos) =>
+    primerError(
+      !datos.loteId ? 'Debes seleccionar un lote' : null,
+      !datos.concepto ? 'Debes seleccionar un concepto' : null,
+      validarNumero(datos.valor, { minimo: 0.01, campo: 'valor del gasto' }),
+      validarFecha(datos.fecha, { campo: 'fecha del gasto' })
+    );
+
   // ➕ Agregar gasto
   const agregar = async () => {
-    if (!nuevo.loteId || !nuevo.concepto || !nuevo.valor) return;
+    const errorValidacion = validarGasto(nuevo);
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
 
     const lote = lotes.find((l) => l.id === nuevo.loteId);
     if (!lote) {
@@ -260,7 +278,12 @@ function Gastos({ usuario, onAbrirSidebar }) {
   // ✏️ Guardar edición
   const guardarEdicion = async () => {
     if (!editando) return;
-    if (!editando.loteId || !editando.concepto || !editando.valor) return;
+
+    const errorValidacion = validarGasto(editando);
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
 
     const lote = lotes.find((l) => l.id === editando.loteId);
     if (!lote) {

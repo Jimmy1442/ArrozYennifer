@@ -55,9 +55,10 @@ function Sidebar({ abierto, onClose }) {
         </button>
 
         <div className="sidebar-logo">
-          <img src={logo} alt="M&S" />
-          <span>M&S Arroz</span>
+          <img src={logo} alt="Arroz con Leche Cremoso" />
+          <span>Arroz con Leche</span>
         </div>
+        <div className="sidebar-franja" aria-hidden="true"></div>
 
         <nav className="sidebar-nav">
           {menuItems.map((item) => (
@@ -76,7 +77,7 @@ function Sidebar({ abierto, onClose }) {
         </nav>
 
         <div className="sidebar-footer">
-          <p>🍚 Dulce Arroz con Love</p>
+          <p>🍚 Arroz con Leche Cremoso</p>
         </div>
       </aside>
     </>

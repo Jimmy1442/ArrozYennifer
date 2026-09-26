@@ -53,6 +53,7 @@ function Login({ onLogin }) {
   return (
     <div className="login-container">
       <div className="login-card">
+        <div className="franja-colombiana" aria-hidden="true"></div>
         <Logo />
 
         <h1 className="login-title">
@@ -60,8 +61,8 @@ function Login({ onLogin }) {
         </h1>
         <p className="login-subtitle">
           {esRegistro
-            ? 'Únete a M&S Dulce Arroz con Love 💛'
-            : 'Un arroz hecho con amor, para endulzar tu día'}
+            ? 'Únete a Arroz con Leche Cremoso 💛'
+            : 'Hecho en casa · Cremoso · Dulce · Tradicional Colombiano'}
         </p>
 
         <ErrorMessage mensaje={error} />
@@ -100,6 +101,7 @@ function Login({ onLogin }) {
           </button>
         </div>
       </div>
+      <div className="franja-colombiana" style={{ maxWidth: 420, width: '100%', marginTop: 18, borderRadius: 8 }} aria-hidden="true"></div>
     </div>
   );
 }

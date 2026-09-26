@@ -1,4 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  /* Paleta "Arroz con Leche" — inspirada en el flyer colombiano */
+  --color-crema: #FFF8E7;
+  --color-crema-suave: #F5F0E6;
+  --color-canela: #5C3A21;
+  --color-canela-suave: #8B7A66;
+  --color-azul: #1D5FA6;
+  --color-azul-claro: #3E8FD6;
+  --color-azul-oscuro: #123E70;
+  --color-rojo: #E63946;
+  --color-rojo-oscuro: #C62E3A;
+  --color-amarillo: #FFD93D;
+  --color-amarillo-fuerte: #FFC107;
+  --font-display: 'Pacifico', cursive;
+  --font-heading: 'Fredoka', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+}
 
 * {
   margin: 0;
@@ -26,7 +44,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3DC5B8 0%, #2A9D8F 100%);
+  background: linear-gradient(135deg, #3E8FD6 0%, #1D5FA6 100%);
   color: #FFD93D;
 }
 
@@ -34,3 +52,42 @@ body {
   font-family: 'Pacifico', cursive;
   font-size: 38px;
 }
+
+/* ═══════════════════════════════════════════
+   FRANJA DECORATIVA "FIESTA COLOMBIANA"
+   Rombos rojo / amarillo / azul, como el borde
+   inferior del flyer. Se usa con <div class="franja-colombiana">
+   ═══════════════════════════════════════════ */
+.franja-colombiana {
+  height: 14px;
+  width: 100%;
+  background:
+    linear-gradient(135deg, var(--color-rojo) 25%, transparent 25%) -7px 0 / 14px 14px,
+    linear-gradient(225deg, var(--color-rojo) 25%, transparent 25%) -7px 0 / 14px 14px,
+    linear-gradient(135deg, var(--color-amarillo) 25%, transparent 25%) 0 0 / 14px 14px,
+    linear-gradient(225deg, var(--color-amarillo) 25%, transparent 25%) 0 0 / 14px 14px,
+    var(--color-azul);
+  background-repeat: repeat-x;
+  flex-shrink: 0;
+}
+
+/* Banderines tipo "papel picado" para encabezados festivos */
+.banderines {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 0;
+  flex-wrap: wrap;
+}
+
+.banderines span {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.banderines span:nth-child(4n+1) { background: var(--color-rojo); }
+.banderines span:nth-child(4n+2) { background: var(--color-amarillo); }
+.banderines span:nth-child(4n+3) { background: var(--color-azul); }
+.banderines span:nth-child(4n)   { background: #FFFFFF; }

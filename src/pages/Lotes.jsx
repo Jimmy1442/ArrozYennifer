@@ -13,6 +13,12 @@ import {
 import { db } from '../firebase';
 import TopBar from '../components/TopBar';
 import Button from '../components/Button';
+import {
+  validarNombre,
+  validarNumero,
+  validarFecha,
+  primerError
+} from '../utils/validaciones';
 import '../styles/Lotes.css';
 
 const UNIDADES = [
@@ -383,14 +389,59 @@ function Lotes({ usuario, onAbrirSidebar }) {
   const totalRealEdit =
     ventasEdit.pagado + baseEdit - gastosEdit.total - costoTotalEdit;
 
+  // 🛡️ Validaciones del lote (nombre, fecha, cantidades y pérdidas)
+  const validarLote = (datos) => {
+    const errorBasico = primerError(
+      validarNombre(datos.nombre, { campo: 'nombre del lote' }),
+      validarFecha(datos.fecha, { campo: 'fecha del lote' }),
+      validarNumero(datos.cantidadProducida, {
+        minimo: 1,
+        entero: true,
+        campo: 'cantidad producida'
+      }),
+      validarNumero(datos.valorUnitario, {
+        minimo: 0,
+        obligatorio: false,
+        campo: 'valor unitario'
+      }),
+      validarNumero(datos.perdidas, {
+        minimo: 0,
+        obligatorio: false,
+        campo: 'pérdidas'
+      }),
+      validarNumero(datos.base, { minimo: 0, obligatorio: false, campo: 'base' })
+    );
+    if (errorBasico) return errorBasico;
+
+    const producido = Number(datos.cantidadProducida) || 0;
+    const perdidas = Number(datos.perdidas) || 0;
+    if (perdidas > producido) {
+      return 'Las pérdidas no pueden ser mayores a la cantidad producida';
+    }
+    return null;
+  };
+
   // ➕ Agregar ingrediente (formulario de creación)
   const agregarIngredienteTemp = () => {
-    if (
-      !ingredienteTemp.nombre.trim() ||
-      !ingredienteTemp.cantidad ||
-      !ingredienteTemp.valorUnitario
-    )
+    const errorValidacion = primerError(
+      validarNombre(ingredienteTemp.nombre, {
+        minimo: 2,
+        maximo: 40,
+        campo: 'nombre del ingrediente'
+      }),
+      validarNumero(ingredienteTemp.cantidad, {
+        minimo: 0.01,
+        campo: 'cantidad del ingrediente'
+      }),
+      validarNumero(ingredienteTemp.valorUnitario, {
+        minimo: 0,
+        campo: 'valor unitario del ingrediente'
+      })
+    );
+    if (errorValidacion) {
+      setError(errorValidacion);
       return;
+    }
 
     const nuevoIng = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -411,6 +462,7 @@ function Lotes({ usuario, onAbrirSidebar }) {
       unidad: 'libras',
       valorUnitario: ''
     });
+    setError('');
   };
 
   const eliminarIngredienteForm = (id) => {
@@ -422,12 +474,25 @@ function Lotes({ usuario, onAbrirSidebar }) {
 
   // ➕ Agregar ingrediente (modal de edición)
   const agregarIngredienteTempEdit = () => {
-    if (
-      !ingredienteTempEdit.nombre.trim() ||
-      !ingredienteTempEdit.cantidad ||
-      !ingredienteTempEdit.valorUnitario
-    )
+    const errorValidacion = primerError(
+      validarNombre(ingredienteTempEdit.nombre, {
+        minimo: 2,
+        maximo: 40,
+        campo: 'nombre del ingrediente'
+      }),
+      validarNumero(ingredienteTempEdit.cantidad, {
+        minimo: 0.01,
+        campo: 'cantidad del ingrediente'
+      }),
+      validarNumero(ingredienteTempEdit.valorUnitario, {
+        minimo: 0,
+        campo: 'valor unitario del ingrediente'
+      })
+    );
+    if (errorValidacion) {
+      setError(errorValidacion);
       return;
+    }
 
     const nuevoIng = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -448,6 +513,7 @@ function Lotes({ usuario, onAbrirSidebar }) {
       unidad: 'libras',
       valorUnitario: ''
     });
+    setError('');
   };
 
   const eliminarIngredienteEdit = (id) => {
@@ -459,7 +525,11 @@ function Lotes({ usuario, onAbrirSidebar }) {
 
   // ➕ Guardar lote nuevo
   const agregar = async () => {
-    if (!nuevo.nombre.trim() || !nuevo.cantidadProducida) return;
+    const errorValidacion = validarLote(nuevo);
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
 
     setGuardando(true);
     setError('');
@@ -508,7 +578,12 @@ function Lotes({ usuario, onAbrirSidebar }) {
   // ✏️ Guardar edición
   const guardarEdicion = async () => {
     if (!editando) return;
-    if (!editando.nombre?.trim() || !editando.cantidadProducida) return;
+
+    const errorValidacion = validarLote(editando);
+    if (errorValidacion) {
+      setError(errorValidacion);
+      return;
+    }
 
     setGuardandoEdit(true);
     setError('');

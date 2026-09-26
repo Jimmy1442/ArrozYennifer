@@ -1,13 +1,13 @@
 import logo from '../assets/logo.png';
 
-function Logo({ size = 140 }) {
+function Logo({ width = 190, height = 240 }) {
   return (
     <div className="logo-wrapper">
       <img
         src={logo}
-        alt="M&S Dulce Arroz con Love"
+        alt="Arroz con Leche Cremoso"
         className="logo-img"
-        style={{ width: size, height: size }}
+        style={{ width, height }}
       />
     </div>
   );

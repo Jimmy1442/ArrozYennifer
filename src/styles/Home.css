@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3DC5B8 0%, #2A9D8F 100%);
+  background: linear-gradient(135deg, #3E8FD6 0%, #1D5FA6 100%);
   font-family: 'Poppins', sans-serif;
   padding: 20px;
 }
@@ -24,12 +24,12 @@
 .home-title {
   font-family: 'Pacifico', cursive;
   font-size: 42px;
-  color: #F26B7A;
+  color: #E63946;
   margin-bottom: 8px;
 }
 
 .home-subtitle {
-  color: #2A9D8F;
+  color: #1D5FA6;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -42,7 +42,7 @@
   text-align: left;
   color: #5C3A21;
   font-size: 14px;
-  border-left: 4px solid #F26B7A;
+  border-left: 4px solid #E63946;
   word-break: break-all;
 }
 

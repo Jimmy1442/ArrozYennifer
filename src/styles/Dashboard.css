@@ -35,7 +35,7 @@
   left: 0;
   width: 240px;
   height: 100vh;
-  background: linear-gradient(180deg, #2A9D8F 0%, #1F7A6F 100%);
+  background: linear-gradient(180deg, #1D5FA6 0%, #123E70 100%);
   display: flex;
   flex-direction: column;
   padding: 25px 18px;
@@ -57,15 +57,34 @@
 
 .sidebar-logo img {
   width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  height: 54px;
+  border-radius: 10px;
   border: 2px solid #FFD93D;
+  object-fit: contain;
+  background: #FFF8E7;
 }
 
 .sidebar-logo span {
   font-family: 'Pacifico', cursive;
   font-size: 18px;
   color: #FFD93D;
+}
+
+.sidebar-link {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.sidebar-franja {
+  height: 8px;
+  margin: 0 -18px 18px;
+  background:
+    linear-gradient(135deg, #E63946 25%, transparent 25%) -4px 0 / 8px 8px,
+    linear-gradient(225deg, #E63946 25%, transparent 25%) -4px 0 / 8px 8px,
+    linear-gradient(135deg, #FFD93D 25%, transparent 25%) 0 0 / 8px 8px,
+    linear-gradient(225deg, #FFD93D 25%, transparent 25%) 0 0 / 8px 8px,
+    #FFFFFF;
+  background-repeat: repeat-x;
+  flex-shrink: 0;
 }
 
 .sidebar-nav {
@@ -170,6 +189,22 @@
   z-index: 50;
 }
 
+.topbar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 6px;
+  background:
+    linear-gradient(135deg, #E63946 25%, transparent 25%) -3px 0 / 6px 6px,
+    linear-gradient(225deg, #E63946 25%, transparent 25%) -3px 0 / 6px 6px,
+    linear-gradient(135deg, #FFD93D 25%, transparent 25%) 0 0 / 6px 6px,
+    linear-gradient(225deg, #FFD93D 25%, transparent 25%) 0 0 / 6px 6px,
+    #1D5FA6;
+  background-repeat: repeat-x;
+}
+
 .topbar-hamburguesa {
   display: none;
   background: #FFF8E7;
@@ -207,7 +242,7 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #F26B7A, #E55568);
+  background: linear-gradient(135deg, #E63946, #C62E3A);
   color: #FFF8E7;
   display: flex;
   align-items: center;
@@ -232,7 +267,7 @@
 .topbar-logout {
   background: none;
   border: none;
-  color: #F26B7A;
+  color: #E63946;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -244,7 +279,7 @@
    WELCOME BANNER
    ═══════════════════════════════════════════ */
 .welcome-banner {
-  background: linear-gradient(135deg, #3DC5B8 0%, #2A9D8F 100%);
+  background: linear-gradient(135deg, #3E8FD6 0%, #1D5FA6 100%);
   border-radius: 20px;
   padding: 30px 35px;
   color: #FFF8E7;
@@ -342,8 +377,8 @@
   font-weight: 700;
 }
 
-.stat-coral     { border-left-color: #F26B7A; }
-.stat-turquesa  { border-left-color: #3DC5B8; }
+.stat-coral     { border-left-color: #E63946; }
+.stat-turquesa  { border-left-color: #3E8FD6; }
 .stat-amarillo  { border-left-color: #FFD93D; }
 .stat-chocolate { border-left-color: #5C3A21; }
 
@@ -471,7 +506,7 @@
 
 .resumen-item.resumen-destacado {
   background: linear-gradient(135deg, #FFF0D4, #FFE5B8);
-  border-left-color: #F26B7A;
+  border-left-color: #E63946;
   grid-column: 1 / -1;
   flex-direction: row;
   justify-content: space-between;
@@ -708,7 +743,7 @@
 
 .lote-stat-money {
   background: #FFF8E7;
-  border-left-color: #F26B7A;
+  border-left-color: #E63946;
 }
 
 .lote-stat-label {
@@ -1186,4 +1221,410 @@
   .dashboard-panel {
     padding: 15px;
   }
+}
+
+/* ═══════════════════════════════════════════
+   LOTE STAT DESTACADO
+   ═══════════════════════════════════════════ */
+.lote-stat-destacado {
+  background: linear-gradient(135deg, #FFF0D4, #FFE5B8);
+  border-left-color: #FFB74D;
+  grid-column: span 2;
+}
+
+.lote-stat-destacado small {
+  font-size: 10px;
+  color: #8B7A66;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .lote-stat-destacado {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   DOBLE TARJETA DE TOTALES EN DASHBOARD
+   ═══════════════════════════════════════════ */
+.dashboard-total-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-total-doble {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.dashboard-total-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 26px;
+  border-radius: 20px;
+  border: 3px solid;
+  flex-wrap: wrap;
+  transition: transform 0.25s ease;
+}
+
+.dashboard-total-card:hover {
+  transform: translateY(-3px);
+}
+
+.dashboard-total-naranja {
+  background: linear-gradient(135deg, #FFF0D4, #FFE5B8);
+  border-color: #FFB74D;
+  box-shadow: 0 8px 25px rgba(255, 183, 77, 0.25);
+}
+
+.dashboard-total-verde {
+  background: linear-gradient(135deg, #E8F9F0, #D3F5E0);
+  border-color: #7ED9A8;
+  box-shadow: 0 8px 25px rgba(126, 217, 168, 0.25);
+}
+
+.dashboard-total-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dashboard-total-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: #5C3A21;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-total-info small {
+  font-size: 11px;
+  color: #8B7A66;
+  font-weight: 500;
+}
+
+.dashboard-total-valor {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .dashboard-total-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .dashboard-total-valor {
+    font-size: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   PANEL RESUMEN GENERAL (como Lote Activo)
+   ═══════════════════════════════════════════ */
+.resumen-general-panel {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E7 100%);
+  border: 3px solid #FFD93D;
+  border-radius: 22px;
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(255, 217, 61, 0.2);
+}
+
+.resumen-general-header {
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed #F0EAD8;
+}
+
+.resumen-general-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #FFD93D;
+  color: #5C3A21;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.resumen-general-header h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  color: #5C3A21;
+  margin: 0 0 6px 0;
+  font-weight: 400;
+}
+
+.resumen-general-header p {
+  color: #8B7A66;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* Ajuste del doble total dentro del panel */
+.resumen-general-panel .dashboard-total-doble {
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+/* Ajuste del último stats-grid */
+.resumen-general-panel .stats-grid:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resumen-general-panel {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .resumen-general-header h2 {
+    font-size: 20px;
+  }
+
+  .resumen-general-header p {
+    font-size: 12px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   PANEL RESUMEN GENERAL
+   ═══════════════════════════════════════════ */
+.resumen-general-panel {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E7 100%);
+  border: 3px solid #FFD93D;
+  border-radius: 22px;
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(255, 217, 61, 0.2);
+}
+
+.resumen-general-header {
+  margin-bottom: 25px;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed #F0EAD8;
+}
+
+.resumen-general-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #FFD93D;
+  color: #5C3A21;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.resumen-general-header h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  color: #5C3A21;
+  margin: 0 0 6px 0;
+  font-weight: 400;
+}
+
+.resumen-general-header p {
+  color: #8B7A66;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   LOTE STAT DESTACADO
+   ═══════════════════════════════════════════ */
+.lote-stat-destacado {
+  background: linear-gradient(135deg, #FFF0D4, #FFE5B8);
+  border-left-color: #FFB74D;
+  grid-column: span 2;
+}
+
+.lote-stat-destacado small {
+  font-size: 10px;
+  color: #8B7A66;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .lote-stat-destacado {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   TOTAL SIMPLE (solo Total con gastos)
+   ═══════════════════════════════════════════ */
+.dashboard-total-simple {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.dashboard-total-simple .dashboard-total-card {
+  max-width: 100%;
+}
+
+.dashboard-total-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 26px;
+  border-radius: 20px;
+  border: 3px solid;
+  flex-wrap: wrap;
+  transition: transform 0.25s ease;
+}
+
+.dashboard-total-card:hover {
+  transform: translateY(-3px);
+}
+
+.dashboard-total-naranja {
+  background: linear-gradient(135deg, #FFF0D4, #FFE5B8);
+  border-color: #FFB74D;
+  box-shadow: 0 8px 25px rgba(255, 183, 77, 0.25);
+}
+
+.dashboard-total-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dashboard-total-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: #5C3A21;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-total-info small {
+  font-size: 11px;
+  color: #8B7A66;
+  font-weight: 500;
+}
+
+.dashboard-total-valor {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .dashboard-total-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .dashboard-total-valor {
+    font-size: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   TARJETA "DEBE" EN LOTE ACTIVO
+   ═══════════════════════════════════════════ */
+.lote-stat-debe {
+  background: linear-gradient(135deg, #FDEBEC, #F8C9CC);
+  border-left-color: #E63946;
+  border: 2px dashed #E63946;
+}
+
+.lote-stat-debe .lote-stat-label {
+  color: #B32430;
+}
+
+.lote-stat-debe small {
+  font-size: 10px;
+  color: #8B7A66;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   SELECTOR DE LOTE EN LOTE ACTIVO
+   ═══════════════════════════════════════════ */
+.lote-selector {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.lote-selector select {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border: 2px solid #FFD93D;
+  border-radius: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5C3A21;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C3A21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  box-shadow: 0 4px 12px rgba(255, 217, 61, 0.15);
+}
+
+.lote-selector select:hover {
+  border-color: #E63946;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(242, 107, 122, 0.2);
+}
+
+.lote-selector select:focus {
+  outline: none;
+  border-color: #E63946;
+  box-shadow: 0 0 0 4px rgba(242, 107, 122, 0.15);
+}
+
+@media (max-width: 768px) {
+  .lote-selector select {
+    font-size: 13px;
+    padding: 10px 14px;
+    padding-right: 36px;
+  }
+}
+/* ═══════════════════════════════════════════
+   TIPOGRAFÍA "AMIGABLE" (Fredoka) EN TÍTULOS
+   ═══════════════════════════════════════════ */
+.topbar-title,
+.panel-title,
+.stat-valor,
+.dashboard-total-label,
+.dashboard-total-valor,
+.seccion-titulo h2,
+.lote-activo-badge,
+.resumen-general-badge,
+.lote-stat-valor,
+.hoy-valor,
+.resumen-valor {
+  font-family: 'Fredoka', sans-serif;
 }
