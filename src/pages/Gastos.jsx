@@ -8,7 +8,7 @@ import {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp
+  serverTimestamp 
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import TopBar from '../components/TopBar';
@@ -1040,4 +1040,5 @@ function Gastos({ usuario, onAbrirSidebar }) {
   );
 }
 
-export default Gastos;
+export default Gastos;  
+//a
